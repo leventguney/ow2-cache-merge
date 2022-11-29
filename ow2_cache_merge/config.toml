@@ -1,0 +1,8 @@
+# If your game is in "/home/username/Games/overwatch-2" "game_dir" value should be as below
+# If it is installed elsewhere you can set an absolute path here like
+# "/run/media/Games/overwatch-2"
+
+game_dir = "Games/overwatch-2"
+[repos]
+GolDNenex="https://raw.githubusercontent.com/GolDNenex/overwatch2-dxvk-cache/main/Overwatch.dxvk-cache"
+Elagoht="https://github.com/Elagoht/overwatch2-dxvkcache/raw/master/Overwatch.dxvk-cache"

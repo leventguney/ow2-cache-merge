@@ -1,0 +1,3 @@
+include ow2_cache_merge/lib/*
+include tests/*.py
+include ow2_cache_merge/config.toml
