@@ -22,7 +22,7 @@ class CacheMerger:
         self.config_file_path: str = os.path.join(self.work_path, 'config.toml')  
         self.cache_files_dir: str = os.path.join(self.work_path, 'cache_files')  
         self.merge_files_dir: str = os.path.join(self.work_path, 'merge_files') 
-        self.cache_tool_path: str = os.path.join(os.path.dirname(__file__), 'lib/dxvk-cache-tool')
+        self.cache_tool_path: str = os.path.join(os.path.dirname(__file__), 'lib', 'dxvk-cache-tool')
         self.config: Dict[str, Any] = {}
         self.records: Dict[str, Any] = {}
         """Holds records of file sizes of the repos"""
@@ -88,15 +88,15 @@ class CacheMerger:
     def _download_cache_file(self, repo: str, url: str):
         logger.info(f'Downloading cache file from repo {repo}..')
         cache_file_dir = os.path.join(self.cache_files_dir, repo)
-        if not os.path.exists(cache_file_dir):
-            try:
+        try:
+            if not os.path.exists(cache_file_dir):
                 os.makedirs(cache_file_dir)
-                cache_file_name = url.split('/')[-1]
-                cache_file_path = os.path.join(cache_file_dir, cache_file_name)
-                self.updated_cache_file_paths.append(cache_file_path)
-                urlretrieve(url, cache_file_path)
-            except Exception as e:
-                print(e)
+            cache_file_name = url.split('/')[-1]
+            cache_file_path = os.path.join(cache_file_dir, cache_file_name)
+            self.updated_cache_file_paths.append(cache_file_path)
+            urlretrieve(url, cache_file_path)
+        except Exception as e:
+            print(e)
 
     def _backup_old_config(self):
         shutil.copyfile(self.config_file_path, self.config_file_path + '.old')
@@ -159,3 +159,6 @@ class CacheMerger:
 def main():
     c=CacheMerger()
     c.check_update()
+
+if __name__ == "__main__":
+    main()
